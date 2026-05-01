@@ -9,9 +9,6 @@ if (process.env.MYSQL_URL || process.env.DATABASE_URL) {
   sequelize = new Sequelize(dbUrl, {
     dialect: 'mysql',
     logging: false,
-    dialectOptions: {
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-    },
   });
 } else {
   sequelize = new Sequelize(
