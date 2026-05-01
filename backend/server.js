@@ -57,9 +57,11 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(frontendPath));
 
   // All non-API routes serve the React app (SPA routing)
-  app.get('*', (req, res) => {
+  app.use((req, res, next) => {
     if (!req.path.startsWith('/api')) {
       res.sendFile(path.join(frontendPath, 'index.html'));
+    } else {
+      next();
     }
   });
 } else {
